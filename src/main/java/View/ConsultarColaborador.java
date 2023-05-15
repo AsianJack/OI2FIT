@@ -37,7 +37,7 @@ public class ConsultarColaborador extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         bt_editar = new javax.swing.JButton();
         bt_excluir = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        bt_pesquisar = new javax.swing.JButton();
         tf_busca = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         listALL = new javax.swing.JList<>();
@@ -90,15 +90,15 @@ public class ConsultarColaborador extends javax.swing.JFrame {
         getContentPane().add(bt_excluir);
         bt_excluir.setBounds(140, 330, 120, 40);
 
-        jButton4.setFont(new java.awt.Font("Ebrima", 0, 12)); // NOI18N
-        jButton4.setText("Buscar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        bt_pesquisar.setFont(new java.awt.Font("Ebrima", 0, 12)); // NOI18N
+        bt_pesquisar.setText("Buscar");
+        bt_pesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                bt_pesquisarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4);
-        jButton4.setBounds(440, 50, 100, 30);
+        getContentPane().add(bt_pesquisar);
+        bt_pesquisar.setBounds(440, 50, 100, 30);
 
         tf_busca.setFont(new java.awt.Font("Ebrima", 0, 14)); // NOI18N
         tf_busca.setText("Digite o CPF do colaborador...");
@@ -127,7 +127,7 @@ public class ConsultarColaborador extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void bt_pesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_pesquisarActionPerformed
         String cpf = tf_busca.getText();  
         if(tf_busca.getText().equalsIgnoreCase("")){
             daocolab.consultarColab();
@@ -136,7 +136,7 @@ public class ConsultarColaborador extends javax.swing.JFrame {
             daocolab.pesquisa(cpf);
             listALL.setModel(daocolab.listar());
         }
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_bt_pesquisarActionPerformed
 
 
     public static void main(String args[]) {
@@ -149,8 +149,8 @@ public class ConsultarColaborador extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_editar;
     private javax.swing.JButton bt_excluir;
+    private javax.swing.JButton bt_pesquisar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;

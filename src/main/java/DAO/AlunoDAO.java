@@ -40,7 +40,7 @@ public class AlunoDAO {
     private final String editar = "Update Aluno Set nome_alu = ? , cpf_alu = ? ,sexo_alu = ?, idade_alu = ?, email_alu = ?, data_matricula_alu = ? where id_alu = ?";
     private final String consultar = "SELECT * FROM Aluno order by nome_alu";
     private static final String sqlexcluir = "DELETE FROM Aluno WHERE id_alu = ?";
-    private static final String sqlconsultaralu = "SELECT * FROM Aluno WHERE cpf_alu = ?";
+    private static final String sqlconsultaralu = "SELECT * FROM Aluno WHERE cpf_alu = ? or nome_alu = ?";
     private static final String sqlconsultar = "SELECT * FROM Aluno order by id_alu";
 
     private static final String cadMedida = "Insert into Medidas(peso_kg, altura_m, imc, id_alu) values (?,?,?,?)";
@@ -264,7 +264,7 @@ public class AlunoDAO {
         try {
             pstdados = conn.prepareStatement(sqlconsultaralu, tipo, concorrencia);
             pstdados.setString(1, cpf);
-
+            pstdados.setString(2, cpf);
             rsdados = pstdados.executeQuery();
 
             if (rsdados.first()) {

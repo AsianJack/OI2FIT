@@ -28,7 +28,7 @@ public class ColaboradorDAO {
     private final String editar = "Update Colaborador Set nome_colab = ? , login_colab = ?, senha_colab = ?, cpf_colab = ? where id_colab = ?";
     private final String consultar = "SELECT * FROM Colaborador order by nome_colab";
     private static final String sqlexcluir = "DELETE FROM Colaborador WHERE id_colab = ?";
-    private static final String sqlconsultarcolab = "SELECT * FROM Colaborador WHERE cpf_colab = ?";
+    private static final String sqlconsultarcolab = "SELECT * FROM Colaborador WHERE cpf_colab = ? or nome_colab = ?";
     private static final String sqlconsultar = "SELECT * FROM Colaborador order by id_colab limit 1";
 
     private PreparedStatement pstdados = null;
@@ -186,7 +186,8 @@ public class ColaboradorDAO {
         try {
             pstdados = conn.prepareStatement(sqlconsultarcolab, tipo, concorrencia);
             pstdados.setString(1, cpf);
-
+            pstdados.setString(2, cpf);
+            
             rsdados = pstdados.executeQuery();
 
             if (rsdados.first()) {
