@@ -45,10 +45,12 @@ public class AlunoDAO {
 
     private static final String cadMedida = "Insert into Medidas(peso_kg, altura_m, imc, id_alu) values (?,?,?,?)";
     private static final String excMedida = "Delete from Medidas where id_medida = ?";
+    private static final String excMedidaalu = "Delete from Medidas where id_alu = ?";
     private static final String consMedida = "Select * from Medidas where id_alu = ?";
 
     private static final String cadTreino = "Insert into Treino(atividade, id_alu) values (?,?)";
     private static final String excTreino = "Delete from Treino where id_treino = ?";
+    private static final String excTreinoalu = "Delete from Treino where id_alu = ?";
     private static final String consTreino = "Select * from Treino where id_alu = ?";
     
     private PreparedStatement pstdados = null;
@@ -247,14 +249,24 @@ public class AlunoDAO {
 
     public boolean deletar(int id) {
         try {
-            pstdados = conn.prepareStatement(sqlexcluir, tipo, concorrencia);
+            pstdados = conn.prepareStatement(excMedidaalu, tipo, concorrencia);
             pstdados.setInt(1, id);
             int resposta = pstdados.executeUpdate();
+            pstdados.close();
+            
+            pstdados = conn.prepareStatement(excTreinoalu, tipo, concorrencia);
+            pstdados.setInt(1, id);
+            resposta = pstdados.executeUpdate();
+            pstdados.close();
+            
+            pstdados = conn.prepareStatement(sqlexcluir, tipo, concorrencia);
+            pstdados.setInt(1, id);
+            resposta = pstdados.executeUpdate();
             pstdados.close();
 
             return resposta == 1;
         } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null, "Erro ao excluir.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Erro ao excluir aluno.", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
         return false;

@@ -102,7 +102,7 @@ public class RelatorioDAO {
         return false;
     }
    
-   public boolean relatorioTreino(boolean view, Map parametro) {
+   public boolean relatorioTreino(boolean view, Map parametro) {;
         JasperPrint impressao;
 
 

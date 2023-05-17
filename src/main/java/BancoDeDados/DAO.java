@@ -31,7 +31,6 @@ public class DAO {
         Properties props = new Properties();
         FileInputStream in = new FileInputStream(fileName);
         props.load(in);
-        String driver = props.getProperty("jdbc.driver");
         url = props.getProperty("jdbc.url");
         username = props.getProperty("jdbc.username");
         if (username == null) {
@@ -41,9 +40,7 @@ public class DAO {
         if (password == null) {
             password = "";
         }
-        if (driver != null) {
-            Class.forName(driver);
-        }
+        
     }
 
     public static Connection getConnection() throws SQLException {
