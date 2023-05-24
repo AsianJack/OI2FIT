@@ -4,6 +4,10 @@ import BancoDeDados.DAO;
 import Model.Colaborador;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -110,7 +114,7 @@ public class ColaboradorDAO {
         try {
             pstdados = conn.prepareStatement(login2, tipo, concorrencia);
             pstdados.setString(1, login);
-            pstdados.setString(2, senha);
+            pstdados.setString(2, gerarHashSenha(senha));
             rsdados = pstdados.executeQuery();
             if (rsdados.first()) {
                 return rsdados.getInt("id_colab");
@@ -180,6 +184,26 @@ public class ColaboradorDAO {
         }
 
         return false;
+    }
+    
+    public String gerarHashSenha(String senha) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hash = md.digest(senha.getBytes());
+
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hash) {
+                String hex = Integer.toHexString(0xFF & b);
+                if (hex.length() == 1) {
+                    hexString.append('0');
+                }
+                hexString.append(hex);
+            }
+            return hexString.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public boolean pesquisa(String cpf) {

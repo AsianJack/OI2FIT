@@ -6,6 +6,9 @@ import DAO.ColaboradorDAO;
 import Model.Colaborador;
 import java.io.IOException;
 import javax.swing.JOptionPane;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 
 
 /**
@@ -104,6 +107,11 @@ public class CadastrarColaborador extends javax.swing.JFrame {
         lb_senha.setBounds(30, 230, 60, 30);
 
         tf_senha.setFont(new java.awt.Font("Ebrima", 0, 14)); // NOI18N
+        tf_senha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_senhaActionPerformed(evt);
+            }
+        });
         getContentPane().add(tf_senha);
         tf_senha.setBounds(90, 230, 250, 30);
 
@@ -147,8 +155,14 @@ public class CadastrarColaborador extends javax.swing.JFrame {
             colab.setNome_colab(tf_nome.getText());
             colab.setCpf_colab(tf_cpf.getText());
             colab.setLogin_colab(tf_login.getText());
-            colab.setSenha_colab(tf_senha.getText());
-
+            //funcao de hash vai aqui
+            
+            String senha = tf_senha.getText();
+            String hashSenha = daocolaborador.gerarHashSenha(senha);
+            System.out.println("\n" + senha);
+            System.out.println("\n" + hashSenha);
+            colab.setSenha_colab(hashSenha);
+            
             daocolaborador.criarColab(colab);  
         }
         limpar();
@@ -157,6 +171,10 @@ public class CadastrarColaborador extends javax.swing.JFrame {
     private void btFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFecharActionPerformed
         dispose();
     }//GEN-LAST:event_btFecharActionPerformed
+
+    private void tf_senhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_senhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_senhaActionPerformed
     
     private boolean verificacampos() {
         return (tf_nome.getText().equals("") || tf_cpf.getText().equals("") || tf_login.getText().equals("") || tf_senha.getText().equals(""));
@@ -168,8 +186,6 @@ public class CadastrarColaborador extends javax.swing.JFrame {
         tf_login.setText("");
         tf_senha.setText("");
     }
-    
-    
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
