@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS Colaborador (
   id_colab integer PRIMARY KEY NOT NULL AUTO_INCREMENT,
   nome_colab VARCHAR(45) NOT NULL,
   login_colab VARCHAR(45) NOT NULL,
-  senha_colab VARCHAR(45) NOT NULL,
+  senha_colab VARCHAR(100) NOT NULL,
   cpf_colab BIGINT(11) NOT NULL,
   Unique(cpf_colab),
   Unique(login_colab));
@@ -48,7 +48,7 @@ INSERT INTO Aluno (nome_alu, cpf_alu, sexo_alu, idade_alu, email_alu, data_matri
 INSERT INTO Aluno (nome_alu, cpf_alu, sexo_alu, idade_alu, email_alu, data_matricula_alu) VALUES ('Laura', '12398787494', 'Feminino', '13', 'laulau@gmail.com', '2022-11-27'); 
 
 INSERT INTO Colaborador (nome_colab, login_colab, senha_colab, cpf_colab) VALUES ('Lucas', 'lucas', '1', '12312312354'); 
-INSERT INTO Colaborador (nome_colab, login_colab, senha_colab, cpf_colab) VALUES ('Administrador', 'adm', 'adm', '89547437543'); 
+INSERT INTO Colaborador (nome_colab, login_colab, senha_colab, cpf_colab) VALUES ('Administrador', 'adm', '86f65e28a754e1a71b2df9403615a6c436c32c42a75a10d02813961b86f1e428', '12312312312'); 
 
 INSERT INTO Medidas (peso_kg, altura_m, imc, id_alu) VALUES ('70', '1.70', '25', '4'); 
 INSERT INTO Medidas (peso_kg, altura_m, imc, id_alu) VALUES ('65', '1.70', '24', '4');
