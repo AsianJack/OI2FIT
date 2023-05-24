@@ -42,6 +42,21 @@ CREATE TABLE IF NOT EXISTS Medidas (
   constraint fk_aluno_medida foreign key (id_alu) references Aluno(id_alu)
 );
 
+CREATE TABLE IF NOT EXISTS Logs_Aluno  (
+	id_log integer PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	updated_at datetime DEFAULT NOW(),
+    id_alu INT NOT NULL,
+	constraint fk_Aluno_log foreign key (id_log) references Aluno(id_alu)
+);
+
+CREATE TABLE IF NOT EXISTS Logs_Colaborador  (
+	id_log integer PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	updated_at datetime DEFAULT NOW(),
+    id_colab INT NOT NULL,
+	constraint fk_Colaborador_log foreign key (id_log) references Aluno(id_colab)
+);
+
+
 INSERT INTO Aluno (nome_alu, cpf_alu, sexo_alu, idade_alu, email_alu, data_matricula_alu) VALUES ('Guilherme', '09853680974', 'Masculino', '18', 'gui@gmail.com', '2022-09-20'); 
 INSERT INTO Aluno (nome_alu, cpf_alu, sexo_alu, idade_alu, email_alu, data_matricula_alu) VALUES ('Jonas', '12345678901', 'Masculino', '20', 'jon@gmail.com', '2022-12-25'); 
 INSERT INTO Aluno (nome_alu, cpf_alu, sexo_alu, idade_alu, email_alu, data_matricula_alu) VALUES ('Michelle', '11111111113', 'Feminino', '22', 'michelle@gmail.com', '2022-10-24'); 
@@ -58,7 +73,34 @@ INSERT INTO Medidas (peso_kg, altura_m, imc, id_alu) VALUES ('80', '1.80', '30',
 INSERT INTO Treino (atividade, id_alu) VALUES ('Treino A de posterior', '4'); 
 INSERT INTO Treino (atividade, id_alu) VALUES ('Treino A de inferior', '3'); 
 
+
+DELIMITER $$
+
+CREATE TRIGGER aluno_update
+AFTER UPDATE
+ON Aluno FOR EACH ROW
+BEGIN
+        INSERT INTO Logs_Aluno(id_alu,updated_at)
+        VALUES(old.id_alu, current_timestamp());
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER colaborador_update
+AFTER UPDATE
+ON Colaborador FOR EACH ROW
+BEGIN
+        INSERT INTO Logs_Colaborador(id_colab,updated_at)
+        VALUES(old.id_colab, current_timestamp());
+END$$
+
+DELIMITER ;
+
 select * from aluno;
 select * from colaborador;
 select * from medidas;
 select * from treino;
+select * from Logs_Aluno;
+select * from Logs_Colaborador;
