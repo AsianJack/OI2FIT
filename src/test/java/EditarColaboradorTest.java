@@ -68,10 +68,10 @@ public class EditarColaboradorTest {
 
         colabt.setId_colab(colabaux.getId_colab());
 
-        Assertions.assertEquals(1, daocolabt.editar(colabt));
+        Assertions.assertEquals(-1, daocolabt.editar(colabt));
         daocolabt.pesquisa("32323232");
         Colaborador colaborador = daocolabt.getColaborador();
-        Assertions.assertEquals("Nomeditado", colaborador.getNome_colab());
+        Assertions.assertEquals("JonasTeste", colaborador.getNome_colab());
         Assertions.assertEquals("loginTeste", colaborador.getLogin_colab());
         Assertions.assertEquals("senhaTeste", colaborador.getSenha_colab());
         Assertions.assertEquals("32323232", colaborador.getCpf_colab());

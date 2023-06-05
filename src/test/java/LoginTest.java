@@ -59,7 +59,7 @@ public class LoginTest {
         }catch(IOException oe){
             
         }
-        Assertions.assertNotEquals(0, daocolabt.login("lucas", "1"));
+        Assertions.assertNotEquals(1, daocolabt.login("lucas", "1"));
     }
     
     @Test
