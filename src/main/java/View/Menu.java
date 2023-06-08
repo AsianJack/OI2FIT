@@ -6,16 +6,22 @@ import DAO.ColaboradorDAO;
 
 public class Menu extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Menu
-     */
+    int id_colab; 
+    
     public Menu() {
         initComponents();
     }
     
-    public Menu(ColaboradorDAO daoaux){
+    public Menu(ColaboradorDAO daoaux, int id_colab){
+       
         initComponents();
+        
         //daoaux.conexao();
+    }
+    
+    public Menu(int id_colab){
+        initComponents();
+        this.id_colab = id_colab;
     }
 
     /**
@@ -31,10 +37,10 @@ public class Menu extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        consultarAluno = new javax.swing.JButton();
+        cadAluno = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
+        sair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -75,25 +81,25 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().add(jButton2);
         jButton2.setBounds(320, 160, 200, 40);
 
-        jButton3.setFont(new java.awt.Font("Ebrima", 0, 12)); // NOI18N
-        jButton3.setText("Consultar Aluno/Medidas");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        consultarAluno.setFont(new java.awt.Font("Ebrima", 0, 12)); // NOI18N
+        consultarAluno.setText("Consultar Aluno/Medidas");
+        consultarAluno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                consultarAlunoActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3);
-        jButton3.setBounds(320, 260, 200, 40);
+        getContentPane().add(consultarAluno);
+        consultarAluno.setBounds(320, 260, 200, 40);
 
-        jButton4.setFont(new java.awt.Font("Ebrima", 0, 12)); // NOI18N
-        jButton4.setText("Cadastrar Aluno");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        cadAluno.setFont(new java.awt.Font("Ebrima", 0, 12)); // NOI18N
+        cadAluno.setText("Cadastrar Aluno");
+        cadAluno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                cadAlunoActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4);
-        jButton4.setBounds(320, 210, 200, 40);
+        getContentPane().add(cadAluno);
+        cadAluno.setBounds(320, 210, 200, 40);
 
         jLabel1.setFont(new java.awt.Font("Ebrima", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(204, 51, 0));
@@ -101,15 +107,15 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(380, 50, 70, 32);
 
-        jButton5.setFont(new java.awt.Font("Ebrima", 0, 12)); // NOI18N
-        jButton5.setText("Sair");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        sair.setFont(new java.awt.Font("Ebrima", 0, 12)); // NOI18N
+        sair.setText("Sair");
+        sair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                sairActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5);
-        jButton5.setBounds(340, 310, 160, 40);
+        getContentPane().add(sair);
+        sair.setBounds(340, 310, 160, 40);
 
         setSize(new java.awt.Dimension(564, 412));
         setLocationRelativeTo(null);
@@ -125,21 +131,21 @@ public class Menu extends javax.swing.JFrame {
         JCadstColab.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-         CadastrarAluno JCadstAlun = new CadastrarAluno ();
+    private void cadAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadAlunoActionPerformed
+         CadastrarAluno JCadstAlun = new CadastrarAluno (id_colab);
         JCadstAlun.setVisible(true);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_cadAlunoActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        ConsultarAluno JConsultAlun = new ConsultarAluno ();
+    private void consultarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarAlunoActionPerformed
+        ConsultarAluno JConsultAlun = new ConsultarAluno(id_colab);
         JConsultAlun.setVisible(true);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_consultarAlunoActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairActionPerformed
         Login JLogin = new Login ();
         JLogin.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_sairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -177,13 +183,13 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cadAluno;
+    private javax.swing.JButton consultarAluno;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton sair;
     // End of variables declaration//GEN-END:variables
 }

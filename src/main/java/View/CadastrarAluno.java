@@ -18,17 +18,22 @@ public class CadastrarAluno extends javax.swing.JFrame {
     Aluno alu = new Aluno();
     AlunoDAO daoaluno = new AlunoDAO();
         
-       
+    int id_colab;
     
-    public CadastrarAluno() {
+    public CadastrarAluno(int id_colab) {
         try{
             initComponents();
+            this.id_colab = id_colab;
             daoaluno.conexao();
         
         }catch(IOException b){
             JOptionPane.showMessageDialog(null, "Conexão não foi estabelecida", "Error", JOptionPane.ERROR_MESSAGE);
         }
         
+    }
+    
+    public CadastrarAluno() {
+        initComponents();
     }
 
     @SuppressWarnings("unchecked")
@@ -163,7 +168,7 @@ public class CadastrarAluno extends javax.swing.JFrame {
             alu.setIdade_alu(Integer.parseInt(tf_idade.getText()));
             alu.setEmail_alu(tf_emails.getText());
 
-            daoaluno.criarAlu(alu);   
+            daoaluno.criarAlu(alu, id_colab);   
         }
         limpar();
     }//GEN-LAST:event_bt_cadastrarActionPerformed

@@ -29,6 +29,9 @@ public class ColaboradorDAO {
     private final String login2 = "Select * from Colaborador where login_colab = ? and senha_colab = ?";
     private final String editar = "Update Colaborador Set nome_colab = ? , login_colab = ?, senha_colab = ?, cpf_colab = ? where id_colab = ?";
     private final String consultar = "SELECT * FROM Colaborador order by nome_colab";
+    
+    private final String getIdColab = "SELECT id_colab FROM Colaborador";
+    
     private static final String sqlexcluir = "DELETE FROM Colaborador WHERE id_colab = ?";
     private static final String sqlconsultarcolab = "SELECT * FROM Colaborador WHERE cpf_colab = ? or nome_colab = ?";
     private static final String sqlconsultar = "SELECT * FROM Colaborador order by id_colab limit 1";
@@ -114,7 +117,11 @@ public class ColaboradorDAO {
             pstdados.setString(1, login);
             pstdados.setString(2, gerarHashSenha(senha));
             rsdados = pstdados.executeQuery();
+//            pstdados = conn.prepareStatement(getIdColab, tipo, concorrencia);
+//            rsdados = pstdados.executeQuery();
+//            System.out.println(rsdados);
             if (rsdados.first()) {
+                System.out.println(rsdados.getInt("id_colab"));
                 return rsdados.getInt("id_colab");
             }
 

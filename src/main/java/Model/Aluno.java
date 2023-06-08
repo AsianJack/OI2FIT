@@ -10,7 +10,7 @@ package Model;
  */
 public class Aluno {
 
-    public Aluno(int id_alu, String nome_alu, String cpf_alu, String sexo_alu, int idade_alu, String email_alu, String data_matricula_alu) {
+    public Aluno(int id_alu, String nome_alu, String cpf_alu, String sexo_alu, int idade_alu, String email_alu, String data_matricula_alu, int id_colab) {
         this.id_alu = id_alu;
         this.cpf_alu = cpf_alu;
         this.nome_alu = nome_alu;
@@ -18,6 +18,7 @@ public class Aluno {
         this.idade_alu = idade_alu;
         this.email_alu = email_alu;
         this.data_matricula_alu = data_matricula_alu;
+        this.id_colab = id_colab;
     }
     
     public Aluno(){
@@ -57,7 +58,15 @@ public class Aluno {
     public String getEmail_alu() {
         return email_alu;
     }
-
+    
+    public int getId_colab(){
+        return id_colab;
+    }
+    
+    public void setId_colab(int id_colab){
+        this.id_colab = id_colab;
+    }
+    
     public void setId_alu(int id_alu) {
         this.id_alu = id_alu;
     }

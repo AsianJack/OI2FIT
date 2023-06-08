@@ -138,7 +138,7 @@ public class Login extends javax.swing.JFrame {
         int login = colabdao.login(logintxt.getText(), senhatxt.getText());
 
         if (login != 0) {
-            Menu JMenu = new Menu();
+            Menu JMenu = new Menu(login);
             JMenu.setVisible(true);
             dispose();
         } else {

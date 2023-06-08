@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package DAO;
 
 import BancoDeDados.DAO;
@@ -36,9 +32,11 @@ public class AlunoDAO {
     //Chamadas SQL para mexer no Banco de Dados
     int tipo = ResultSet.TYPE_SCROLL_SENSITIVE;
     int concorrencia = ResultSet.CONCUR_UPDATABLE;
-    private final String criarAlu = "Insert into Aluno(nome_alu, cpf_alu, sexo_alu, idade_alu, email_alu, data_matricula_alu) values (?,?,?,?,?,?)";
-    private final String editar = "Update Aluno Set nome_alu = ? , cpf_alu = ? ,sexo_alu = ?, idade_alu = ?, email_alu = ?, data_matricula_alu = ? where id_alu = ?";
-    private final String consultar = "SELECT * FROM Aluno order by nome_alu";
+    private final String criarAlu = "Insert into Aluno(nome_alu, cpf_alu, sexo_alu, idade_alu, email_alu, data_matricula_alu, id_colab) values (?,?,?,?,?,?, ?)";
+    private final String editar = "Update Aluno Set nome_alu = ? , cpf_alu = ? ,sexo_alu = ?, idade_alu = ?, email_alu = ?, data_matricula_alu = ?  where id_alu = ?";
+    
+    private final String consultar = "SELECT * FROM Aluno where id_colab = ? order by nome_alu";
+   
     private static final String sqlexcluir = "DELETE FROM Aluno WHERE id_alu = ?";
     private static final String sqlconsultaralu = "SELECT * FROM Aluno WHERE cpf_alu = ? or nome_alu = ?";
     private static final String sqlconsultar = "SELECT * FROM Aluno order by id_alu";
@@ -96,7 +94,7 @@ public class AlunoDAO {
         return false;
     }
 
-    public int criarAlu(Aluno alu) {
+    public int criarAlu(Aluno alu, int id_colab) {
         try {
             String timeStamp = new SimpleDateFormat("yyyy/MM/dd").format(Calendar.getInstance().getTime());
             pstdados = conn.prepareStatement(criarAlu, tipo, concorrencia);
@@ -106,6 +104,7 @@ public class AlunoDAO {
             pstdados.setInt(4, alu.getIdade_alu());
             pstdados.setString(5, alu.getEmail_alu());
             pstdados.setString(6, timeStamp);
+            pstdados.setInt(7, id_colab);
             execute = pstdados.executeUpdate();//retorna um numero positivo pra cima de 0 no caso, retorna 0 se caso nenhuma linha foi mudada
             pstdados.close();
             JOptionPane.showMessageDialog(null, "Aluno inserido com sucesso.", "Ok", JOptionPane.INFORMATION_MESSAGE);
@@ -201,9 +200,10 @@ public class AlunoDAO {
         return false;
     }
 
-    public boolean consultarAlu() {
+    public boolean consultarAlu(int id_colab) {
         try {
             pstdados = conn.prepareStatement(consultar, tipo, concorrencia);
+            pstdados.setInt(1, id_colab);
             rsdados = pstdados.executeQuery();
             return true;
         } catch (SQLException erro) {
@@ -357,7 +357,8 @@ public class AlunoDAO {
                 int idade = rsdados.getInt("idade_alu");
                 String email = rsdados.getString("email_alu");
                 String data_matricula = rsdados.getString("data_matricula_alu");
-                alu = new Aluno(id, nome, cpf, sexo, idade, email, data_matricula);
+                int id_colab = rsdados.getInt("id_colab");
+                alu = new Aluno(id, nome, cpf, sexo, idade, email, data_matricula, id_colab);
             } catch (SQLException erro) {
                 System.out.println(erro);
             }

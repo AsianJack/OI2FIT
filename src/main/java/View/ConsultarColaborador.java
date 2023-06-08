@@ -118,7 +118,7 @@ public class ConsultarColaborador extends javax.swing.JFrame {
     private void bt_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_editarActionPerformed
         frase = listALL.getSelectedValue();
         item = frase.substring(frase.indexOf(" CPF: ") + 7, frase.indexOf("  Login: "));
-        JanEditarColaborador janeditarcolaborador = new JanEditarColaborador(daocolab, item);
+        EditarColaborador janeditarcolaborador = new EditarColaborador(daocolab, item);
         janeditarcolaborador.setVisible(true);
         dispose();
     }//GEN-LAST:event_bt_editarActionPerformed

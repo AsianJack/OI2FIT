@@ -9,13 +9,16 @@ public class EditarAluno extends javax.swing.JFrame {
 
     Aluno alu = new Aluno();
     AlunoDAO daoaluno = new AlunoDAO();
-
+    int id_colab;
+            
     public EditarAluno() {
         initComponents();
     }
 
-    public EditarAluno(AlunoDAO a, String cpf) {
+    public EditarAluno(AlunoDAO a, String cpf, int id_colab) {
         initComponents();
+        this.id_colab = id_colab;
+        
         daoaluno = a;
         if (daoaluno.pesquisa(cpf)) {
             alu.setId_alu(daoaluno.getAluno().getId_alu());
@@ -160,14 +163,16 @@ public class EditarAluno extends javax.swing.JFrame {
             alu.setIdade_alu(Integer.parseInt(tf_idade.getText()));
             alu.setEmail_alu(tf_email.getText());
             daoaluno.editar(alu);
-            System.out.println(alu.getNome_alu());
+     
         }
     }//GEN-LAST:event_bt_salvarActionPerformed
 
     private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
-        dispose();
-        ConsultarAluno janconsultaraluno = new ConsultarAluno();
+        
+        ConsultarAluno janconsultaraluno = new ConsultarAluno(id_colab);
         janconsultaraluno.setVisible(true);
+        dispose();
+        System.out.println(id_colab);
 
     }//GEN-LAST:event_btVoltarActionPerformed
 

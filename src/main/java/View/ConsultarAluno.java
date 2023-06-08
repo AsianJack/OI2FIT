@@ -10,20 +10,29 @@ public class ConsultarAluno extends javax.swing.JFrame {
 
     AlunoDAO daoaluno = new AlunoDAO();
 
-
+    int id_colab;
+    
     String frase = "";
     String item = "";
 
-    public ConsultarAluno() {
+    public ConsultarAluno(int id_colab) {
         try {
             initComponents();
+            this.id_colab = id_colab;
+            System.out.println(id_colab);
             daoaluno.conexao();
-            daoaluno.consultarAlu();
+            daoaluno.consultarAlu(id_colab);
             listALL.setModel(daoaluno.listar());
 
         } catch (IOException b) {
             JOptionPane.showMessageDialog(null, "Conexão não foi estabelecida", "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
+    
+    public ConsultarAluno() {
+  
+            initComponents();
+       
     }
 
     @SuppressWarnings("unchecked")
@@ -154,7 +163,7 @@ public class ConsultarAluno extends javax.swing.JFrame {
             listALL.removeAll();
             int i = Integer.valueOf(item);
             daoaluno.deletar(i);
-            daoaluno.consultarAlu();
+            daoaluno.consultarAlu(id_colab);
             listALL.setModel(daoaluno.listar());
         }catch(NumberFormatException a){
             JOptionPane.showMessageDialog(null, "Selecione um registro", "Error", JOptionPane.INFORMATION_MESSAGE);
@@ -182,7 +191,7 @@ public class ConsultarAluno extends javax.swing.JFrame {
         try{
             frase = listALL.getSelectedValue();
             item = frase.substring(frase.indexOf(" CPF: ") + 7, frase.indexOf("  Sexo: "));
-            JanEditarAluno janeditaraluno = new JanEditarAluno(daoaluno, item);
+            EditarAluno janeditaraluno = new EditarAluno(daoaluno, item, id_colab);
             
             janeditaraluno.setVisible(true);
             dispose();
