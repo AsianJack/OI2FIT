@@ -38,8 +38,8 @@ public class AlunoDAO {
     private final String consultar = "SELECT * FROM Aluno where id_colab = ? order by nome_alu";
    
     private static final String sqlexcluir = "DELETE FROM Aluno WHERE id_alu = ?";
-    private static final String sqlconsultaralu = "SELECT * FROM Aluno WHERE cpf_alu = ? or nome_alu = ?";
-    private static final String sqlconsultar = "SELECT * FROM Aluno order by id_alu";
+    private static final String sqlconsultaralu = "SELECT * FROM Aluno WHERE (cpf_alu = ? OR nome_alu = ?) AND id_colab = ?";
+    private static final String sqlconsultar = "SELECT * FROM Aluno where cpf_alu = ? or nome_alu = ?";
 
     private static final String cadMedida = "Insert into Medidas(peso_kg, altura_m, imc, id_alu) values (?,?,?,?)";
     private static final String excMedida = "Delete from Medidas where id_medida = ?";
@@ -55,6 +55,7 @@ public class AlunoDAO {
     private ResultSet rsdados = null;
     private ResultSet rsdados2 = null;
     private ResultSet rsdados3 = null;
+    private ResultSet rsdados4 = null;
     Connection conn = null;
     private int execute = 0;
     CallableStatement callableStatement = null;
@@ -236,9 +237,10 @@ public class AlunoDAO {
         return false;
     }
     
-    public boolean consultarTodos() {
+    public boolean consultarTodos(int id_colab) {
         try {
-            pstdados = conn.prepareStatement(sqlconsultar, tipo, concorrencia);
+            pstdados = conn.prepareStatement(consultar, tipo, concorrencia);
+            pstdados.setInt(1, id_colab);
             rsdados = pstdados.executeQuery();
             return true;
         } catch (SQLException erro) {
@@ -273,10 +275,30 @@ public class AlunoDAO {
     }
 
     public boolean pesquisa(String cpf) {
+        try {           
+            pstdados = conn.prepareStatement(sqlconsultar, tipo, concorrencia);
+            pstdados.setString(1, cpf);
+            pstdados.setString(2, cpf);
+           
+            rsdados = pstdados.executeQuery();
+
+            if (rsdados.first()) {
+
+            }
+
+            return true;
+        } catch (SQLException sqlerro) {
+
+        }
+        return false;
+    }
+    
+    public boolean buscar(String cpf, int id_colab) {
         try {
             pstdados = conn.prepareStatement(sqlconsultaralu, tipo, concorrencia);
             pstdados.setString(1, cpf);
             pstdados.setString(2, cpf);
+            pstdados.setInt(3, id_colab);
             rsdados = pstdados.executeQuery();
 
             if (rsdados.first()) {

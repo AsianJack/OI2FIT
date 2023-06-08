@@ -19,12 +19,13 @@ public class CadastrarMedidas extends javax.swing.JFrame {
     Medidas med = new Medidas();
     
     AlunoDAO daoaluno = new AlunoDAO();
+    int id_colab;
     
     public CadastrarMedidas() {
         initComponents();
     }
     
-    public CadastrarMedidas(AlunoDAO a, String cpf) {
+    public CadastrarMedidas(AlunoDAO a, String cpf, int id_colab) {
         initComponents();
         daoaluno = a;
         if(daoaluno.pesquisa(cpf)){
@@ -114,7 +115,7 @@ public class CadastrarMedidas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFecharActionPerformed
-        MedidasAluno md = new MedidasAluno(daoaluno, daoaluno.getAluno().getCpf_alu());
+        MedidasAluno md = new MedidasAluno(daoaluno, daoaluno.getAluno().getCpf_alu(), id_colab);
         md.setVisible(true);
         dispose();
     }//GEN-LAST:event_btFecharActionPerformed

@@ -179,10 +179,10 @@ public class ConsultarAluno extends javax.swing.JFrame {
     private void bt_pesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_pesquisarActionPerformed
         String cpf = tf_busca.getText();
         if (tf_busca.getText().equalsIgnoreCase("")) {
-            daoaluno.consultarTodos();
+            daoaluno.consultarTodos(id_colab);
             daoaluno.listar();
         }else {
-            daoaluno.pesquisa(cpf);
+            daoaluno.buscar(cpf, id_colab);            
             listALL.setModel(daoaluno.listar());
         }
     }//GEN-LAST:event_bt_pesquisarActionPerformed
@@ -204,7 +204,7 @@ public class ConsultarAluno extends javax.swing.JFrame {
         try{
             frase = listALL.getSelectedValue();
             item = frase.substring(frase.indexOf(" CPF: ") + 7, frase.indexOf("  Sexo: "));
-            MedidasAluno JMedidasAluno = new MedidasAluno(daoaluno, item);
+            MedidasAluno JMedidasAluno = new MedidasAluno(daoaluno, item, id_colab);
             JMedidasAluno.setVisible(true);
             dispose();
         }catch(NullPointerException a){

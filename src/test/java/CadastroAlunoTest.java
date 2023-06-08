@@ -44,18 +44,20 @@ public class CadastroAlunoTest {
     @Test
     public void testaCadastroAlunoCerto() {     //PASSAMOS TODOS OS PARAMETROS CORRETAMENTA, OU SEJA O RESULTADO ESPERADO DO TESTE É 1, OU SEJA DEU CERTO
         AlunoDAO daoalunot = new AlunoDAO();
-        
+        int id_colab = 1;
         Aluno alunot = new Aluno();
         try{
+            
             daoalunot.conexaoTeste();
             alunot.setNome_alu("AlunoTeste");
             alunot.setCpf_alu("4354534543");
             alunot.setSexo_alu("Masculino");
             alunot.setIdade_alu(10);
             alunot.setEmail_alu("teste@gmail.com");
+            alunot.setId_colab(id_colab);
         }catch(Exception oe){  
         }
-        Assertions.assertEquals(1,daoalunot.criarAlu(alunot));
+        Assertions.assertEquals(1,daoalunot.criarAlu(alunot, id_colab));
         
         String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
         daoalunot.pesquisa("4354534543");
@@ -72,7 +74,7 @@ public class CadastroAlunoTest {
     @Test
     public void testaCadastroAlunoCerto2() {     //PASSAMOS TODOS OS PARAMETROS CORRETAMENTA, OU SEJA O RESULTADO ESPERADO DO TESTE É 1, OU SEJA DEU CERTO
         AlunoDAO daoalunot = new AlunoDAO();
-        
+        int id_colab = 1;
         Aluno alunot = new Aluno();
         try{
             daoalunot.conexaoTeste();
@@ -81,9 +83,10 @@ public class CadastroAlunoTest {
             alunot.setSexo_alu("Feminino");
             alunot.setIdade_alu(10);
             alunot.setEmail_alu("teste2@gmail.com");
+            alunot.setId_colab(id_colab);
         }catch(Exception oe){  
         }
-        Assertions.assertEquals(1,daoalunot.criarAlu(alunot));
+        Assertions.assertEquals(1,daoalunot.criarAlu(alunot, id_colab));
         
         String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
         daoalunot.pesquisa("4354534533");
@@ -100,7 +103,7 @@ public class CadastroAlunoTest {
     @Test
     public void testaCadastroAlunoErrado() {    //COMO NAO PASSAMOS O CPF, E NO BD ELE N PODE SER NULL, E NO TESTE ESPERAMOS DAR -1 OU SEJA ERRO
         AlunoDAO daoalunot = new AlunoDAO();
-        
+        int id_colab = 1;
         Aluno alunot = new Aluno();
         try{
             daoalunot.conexaoTeste();
@@ -109,19 +112,19 @@ public class CadastroAlunoTest {
             alunot.setIdade_alu(10);
             alunot.setEmail_alu("teste@gmail.com");
             alunot.setData_matricula_alu("2022-09-21");
-            
+            alunot.setId_colab(id_colab);
             
         }catch(Exception oe){
             
         }
-        Assertions.assertEquals(-1,daoalunot.criarAlu(alunot));
+        Assertions.assertEquals(-1,daoalunot.criarAlu(alunot, id_colab));
         //teremos -1 pois deixamos o cpf como null e no banco de dados o cpf esta como not null
     }
     
     @Test
     public void testaCadastroAlunoErrado2() {    //COMO NAO PASSAMOS O CPF, E NO BD ELE N PODE SER NULL, E NO TESTE ESPERAMOS DAR -1 OU SEJA ERRO
         AlunoDAO daoalunot = new AlunoDAO();
-        
+        int id_colab = 1;
         Aluno alunot = new Aluno();
         try{
             daoalunot.conexaoTeste();
@@ -130,12 +133,12 @@ public class CadastroAlunoTest {
             alunot.setIdade_alu(18);
             alunot.setEmail_alu("teste2@gmail.com");
             alunot.setData_matricula_alu("2022-09-21");
-            
+            alunot.setId_colab(id_colab);
             
         }catch(Exception oe){
             
         }
-        Assertions.assertEquals(-1,daoalunot.criarAlu(alunot));
+        Assertions.assertEquals(-1,daoalunot.criarAlu(alunot, id_colab));
         //teremos -1 pois deixamos o cpf como null e no banco de dados o cpf esta como not null
     }
 }

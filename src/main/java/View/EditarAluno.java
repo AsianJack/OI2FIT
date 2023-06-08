@@ -20,6 +20,7 @@ public class EditarAluno extends javax.swing.JFrame {
         this.id_colab = id_colab;
         
         daoaluno = a;
+//        if (daoaluno.pesquisa(cpf, id_colab)) {
         if (daoaluno.pesquisa(cpf)) {
             alu.setId_alu(daoaluno.getAluno().getId_alu());
             tf_nomeP.setText(daoaluno.getAluno().getNome_alu());

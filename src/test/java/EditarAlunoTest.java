@@ -43,7 +43,7 @@ public class EditarAlunoTest {
     @Test
     public void testaEdicaoColabCerto() {     //PASSAMOS TODOS OS PARAMETROS CORRETAMENTA, OU SEJA O RESULTADO ESPERADO DO TESTE É 1, OU SEJA DEU CERTO
         AlunoDAO daoalunot = new AlunoDAO();
-
+        int id_colab = 1;
         Aluno alunot = new Aluno();
         try {
             daoalunot.conexaoTeste();
@@ -53,7 +53,8 @@ public class EditarAlunoTest {
             alunot.setIdade_alu(10);
             alunot.setEmail_alu("teste@gmail.com");
             alunot.setData_matricula_alu("2022-09-21");
-            daoalunot.criarAlu(alunot);
+            alunot.setId_colab(id_colab);
+            daoalunot.criarAlu(alunot, id_colab);
             daoalunot.pesquisa("4354534543");
             String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
             daoalunot.pesquisa("4354534543");
@@ -73,7 +74,7 @@ public class EditarAlunoTest {
         alunot.setIdade_alu(10);
         alunot.setEmail_alu("teste@gmail.com");
         alunot.setData_matricula_alu("2022-09-21");
-
+        alunot.setId_colab(id_colab);
         daoalunot.pesquisa("4354534543");
         Aluno alunoaux = daoalunot.getAluno();
         alunot.setId_alu(alunoaux.getId_alu());

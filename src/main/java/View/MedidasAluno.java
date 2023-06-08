@@ -21,6 +21,7 @@ public class MedidasAluno extends javax.swing.JFrame {
     AlunoDAO daoaluno = new AlunoDAO();
     RelatorioDAO rel = new RelatorioDAO();
     
+    int id_colab;
     String frase = "";
     String item = "";
     
@@ -28,8 +29,9 @@ public class MedidasAluno extends javax.swing.JFrame {
         initComponents();
     }
     
-    public MedidasAluno(AlunoDAO a, String cpf) {
+    public MedidasAluno(AlunoDAO a, String cpf, int id_colab) {
         initComponents();
+        this.id_colab = id_colab;
         daoaluno = a;
         rel.criaConexao();
         if(daoaluno.pesquisa(cpf)){
@@ -180,7 +182,7 @@ public class MedidasAluno extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_relatoriosActionPerformed
 
     private void bt_cadastrar_medidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cadastrar_medidaActionPerformed
-       CadastrarMedidas JCadastraMedida = new CadastrarMedidas(daoaluno, daoaluno.getAluno().getCpf_alu());
+       CadastrarMedidas JCadastraMedida = new CadastrarMedidas(daoaluno, daoaluno.getAluno().getCpf_alu(), id_colab);
        JCadastraMedida.setVisible(true);
        dispose();
     }//GEN-LAST:event_bt_cadastrar_medidaActionPerformed
